@@ -1,2 +1,2 @@
 # CRYENGINE-Code-Snippets
-My CRYENGINE Codings
+My CRYENGINE Codes
