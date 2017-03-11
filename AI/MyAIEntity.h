@@ -9,6 +9,10 @@
 
 #include "Player/ISimpleActor.h"
 
+#include <CryAISystem/IAIObjectManager.h>
+#include <CryAISystem/IVisionMap.h>
+#include <CryAISystem/VisionMapTypes.h>
+
 class CMyAIEntity
 	: public CGameObjectExtensionHelper<CMyAIEntity, ISimpleActor>
 {
@@ -20,5 +24,16 @@ public:
 	virtual bool Init(IGameObject* pGameObject) override;
 	virtual void PostInit(IGameObject* pGameObject) override;
 	virtual void ProcessEvent(SEntityEvent& event) override;
+	virtual void Update(SEntityUpdateContext& ctx, int updateSlot) override;
 	// ~ISimpleActor
+
+protected:
+	void InitializeVisionPoints();
+	void TerminateVisionPoints();
+	void UpdateVisionPointLocations();
+	void VisionChanged(const VisionID& observerID, const ObserverParams& observerParams, const VisionID& observableID, const ObservableParams& observableParams, bool visible);
+	void Physicalize();
+
+	VisionID m_ObserverVisionID;
+	VisionID m_ObservableVisionID;
 };
